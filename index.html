@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RevX Paid Scrims Tournament</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            max-width: 200px; /* Adjust as needed */
+            height: auto;
+        }
+        h1 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 10px;
+        }
+        .quote {
+            text-align: center;
+            font-style: italic;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 6px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #c9302c;
+        }
+        .social-links {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .social-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+        }
+        .social-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+        }
+        .social-text {
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="logo.png" alt="RevX Esports Logo" class="logo"> </div>
+    <h1>RevX Paid Scrims Tournament</h1>
+    <p class="quote">Grind With Us</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Team Name</th>
+                <th>BOOYAH!</th>
+                <th>Kills</th>
+                <th>Placement</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody id="tournament-table-body">
+            </tbody>
+    </table>
+
+    <div class="button-container">
+        <button onclick="resetTable()">Reset All</button>
+    </div>
+
+    <div class="social-links">
+        <a href="#" class="social-link">
+            <img src="whatsapp_logo.png" alt="WhatsApp Logo" class="social-logo"> <span class="social-text">RevX Paid Scrims</span>
+        </a>
+        <a href="#" class="social-link">
+            <img src="whatsapp_logo.png" alt="WhatsApp Logo" class="social-logo"> <span class="social-text">DM +91 9403191781</span>
+        </a>
+        <a href="#" class="social-link">
+            <img src="youtube_logo.png" alt="YouTube Logo" class="social-logo"> <span class="social-text">RevX Shadow Live</span>
+        </a>
+        <a href="#" class="social-link">
+            <img src="instagram_logo.png" alt="Instagram Logo" class="social-logo"> <span class="social-text">host.revx15</span>
+        </a>
+    </div>
+
+    <script>
+        const tableBody = document.getElementById('tournament-table-body');
+        const numTeams = 12; // You mentioned 12 teams
+
+        function createTableRows() {
+            for (let i = 1; i <= numTeams; i++) {
+                const row = tableBody.insertRow();
+                const rankCell = row.insertCell();
+                const nameCell = row.insertCell();
+                const booyahCell = row.insertCell();
+                const killsCell = row.insertCell();
+                const placementCell = row.insertCell();
+                const totalCell = row.insertCell();
+
+                rankCell.textContent = i;
+                nameCell.innerHTML = `<input type="text" value="Team ${i}">`;
+                booyahCell.innerHTML = `<input type="text">`;
+                killsCell.innerHTML = `<input type="number" value="0" onchange="updateTotal(this)">`;
+                placementCell.innerHTML = `<input type="number" value="0" onchange="updateTotal(this)">`;
+                totalCell.innerHTML = `<input type="number" value="0" readonly>`;
+            }
+        }
+
+        function updateTotal(input) {
+            const row = input.parentNode.parentNode;
+            const killsInput = row.cells[3].querySelector('input[type="number"]');
+            const placementInput = row.cells[4].querySelector('input[type="number"]');
+            const totalInput = row.cells[5].querySelector('input[type="number"]');
+
+            const kills = parseInt(killsInput.value) || 0;
+            const placement = parseInt(placementInput.value) || 0;
+            totalInput.value = kills + placement;
+        }
+
+        function resetTable() {
+            tableBody.innerHTML = '';
+            createTableRows();
+        }
+
+        createTableRows();
+    </script>
+</body>
+</html>
